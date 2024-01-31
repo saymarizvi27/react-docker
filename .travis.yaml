@@ -8,3 +8,14 @@ before_install:
 script:
   - docker container -e CI=true run sayma/docker-react npm run test
 
+deploy:
+  provider: elasticbeanstalk
+  region: us-west-2
+  app: docker
+  env: "Docker-env"
+  bucket_name: "elasticbean-stalk-us-west-2-306477890"
+  build_path: "docker"
+  on:
+    branch: "master"
+  access_key_id: "$AWS_ACCESS_KEY"
+  secret_access_key: "$AWS_SECRET_KEY"
